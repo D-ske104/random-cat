@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NextPage } from "next";
+import type { NextPage, GetServerSideProps } from "next";
 
 interface CatCategory {
   id: number;
@@ -68,5 +68,15 @@ const IndexPage: NextPage<IndexPageProps> = ({ initialCatImageUrl }) => {
   )
 };
 
+export const getServerSideProps: GetServerSideProps<
+  IndexPageProps
+> = async () => {
+  const catImage = await fetchCatImage();
+  return {
+    props: {
+      initialCatImageUrl: catImage.url,
+    },
+  };
+};
 
 export default IndexPage;
