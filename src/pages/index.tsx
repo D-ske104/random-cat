@@ -11,6 +11,34 @@ const randomCatImage = (): string => {
   return catImages[index]
 }
 
+const fetchCatImage = async () => {
+  // Docs: [TheReportAPI: Report Portal](https://developers.thecatapi.com/view-account/ylX4blBYT9FaoVd6OhvR?report=bOoHBz-8t)
+  const res = await fetch("https://api.thecatapi.com/v1/images/search");
+  /* sample res structure
+    [
+      {
+        "breeds": [],
+        "categories": [
+          {
+            "id": 2,
+            "name": "space"
+          }
+        ],
+        "id": "5dc",
+        "url": "https://cdn2.thecatapi.com/images/5dc.jpg",
+        "width": 760,
+        "height": 500
+      }
+    ]
+  */
+  const result = await res.json();
+  return result[0]
+}
+
+fetchCatImage().then((image) => {
+  console.log(`猫の画像: ${image.url}`);
+})
+
 const IndexPage = () => {
   const [catImageUrl, setCatImageUrl] = useState(
     "https://cdn2.thecatapi.com/images/bpc.jpg"
