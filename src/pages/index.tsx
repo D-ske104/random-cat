@@ -1,5 +1,5 @@
 const IndexPage = () => {
-  return <h1>Hello, Next.js 👋</h1>;
+  return <img src="https://cdn2.thecatapi.com/images/bpc.jpg" />;
 };
  
 export default IndexPage;
